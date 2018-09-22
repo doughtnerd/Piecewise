@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum ObstacleType {
-    TestObstacle1
+public class ObstacleSize : MonoBehaviour {
+
+    public int width;
 }
