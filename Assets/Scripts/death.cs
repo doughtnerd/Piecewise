@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.SceneManagement;
+
 public class death : MonoBehaviour {
 
     public static event Action PlayerDeathEvent;
@@ -10,18 +12,10 @@ public class death : MonoBehaviour {
     {
         if (collision.gameObject.tag == "obstacle")
         {
-            function1();
-            function2();
+            SceneManager.LoadScene("DeathScreen");
 
         }
     }
 
-    void function1()
-    {
-
-    }
-    void function2()
-    {
-
-    }
+    
 }
