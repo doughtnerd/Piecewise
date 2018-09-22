@@ -14,9 +14,12 @@ public class GameController : MonoBehaviour
     private float TIMER_INTERVAL = 1;
     private float TIMER_DURATION = 3;
 
+    public static float OBSTACLE_MOVEMENT_SPEED = 10;
+
     // Use this for initialization
     void Start()
     {
+
         Checkpoint.CheckpointAction += HandleCheckpoint;
         ObstacleSelectionUI.ObstaclesSelectedEvent += HandleObstacleSelection;
     }

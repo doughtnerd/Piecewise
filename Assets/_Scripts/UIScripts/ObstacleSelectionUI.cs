@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 
 public class ObstacleSelectionUI : MonoBehaviour {
+
     private List<ObstacleType> selection = new List<ObstacleType>();
     private List<ObstacleType> available = new List<ObstacleType>();
     private int selected = 0;
@@ -12,22 +13,39 @@ public class ObstacleSelectionUI : MonoBehaviour {
 
     public static Action<List<ObstacleType>> ObstaclesSelectedEvent;
 
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public static ObstacleSelectionUI Instance;
 
-    void Open ()
+    [SerializeField]
+    private GameObject uiPanel;
+
+
+    private void Awake()
     {
-
+        Instance = this;
     }
 
-    void ObstacleSelected(int buttonIndex)
+    void Show (bool setActive)
+    {
+        uiPanel.SetActive(setActive);
+    }
+
+    public void AutoAssignSelection()
+    {
+        while(selected != MAX_SELECTION_SIZE)
+        {
+            for(int i = 0; i < available.Count; i++)
+            {
+                ObstacleType type = available[i];
+                if(!selection.Contains(type))
+                {
+                    ObstacleSelected(i);
+                    break;
+                }
+            }
+        }
+    }
+
+    public void ObstacleSelected(int buttonIndex)
     {
         if (selected != MAX_SELECTION_SIZE)
         {
