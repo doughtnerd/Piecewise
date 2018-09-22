@@ -30,6 +30,9 @@ public class JumpingCharacter : MonoBehaviour
     private Rigidbody rigid;
     private Animator anim;
 
+    private bool startTimer = false;
+    private float myTimer = 0.0f;
+    public float jumpWindowInSeconds = 1.0f;
 
     private void Start()
     {
@@ -37,6 +40,20 @@ public class JumpingCharacter : MonoBehaviour
         //this.anim = GetComponent<Animator>();
     }
 
+    private void Update()
+    {
+        if (startTimer)
+        {
+            myTimer += Time.deltaTime;
+            if (myTimer >= jumpWindowInSeconds)
+            {
+                this.isGrounded = false;
+                startTimer = false;
+                myTimer = 0.0f;
+            }
+        }
+    }
+    
     public void Jump(int jumpmultiplyer =1)
     {
         if (isGrounded && currentJump < jumpCount)
@@ -70,6 +87,8 @@ public class JumpingCharacter : MonoBehaviour
         {
             if (LayerMask.GetMask(LayerMask.LayerToName(collision.gameObject.layer)) == groundLayer.value)
             {
+                myTimer = 0.0f;
+                startTimer = false;
                 this.isGrounded = true;
                 //this.anim.SetBool("jumping", false);
                 this.currentJump = 0;
@@ -81,7 +100,7 @@ public class JumpingCharacter : MonoBehaviour
     {
         if (LayerMask.GetMask(LayerMask.LayerToName(collision.gameObject.layer)) == groundLayer.value)
         {
-            this.isGrounded = false;
+            startTimer = true;
         }
     }
 }
