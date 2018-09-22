@@ -7,6 +7,8 @@ public class playermovement : MonoBehaviour
     //public float jumpHeight;
 
     private Rigidbody playerRigidBody;
+    private Vector3 crouchHeight = new Vector3 (1,.5f,1);
+    private Vector3 normalHeight = new Vector3(1, 1, 1);
 
 
     void Start()
@@ -27,6 +29,11 @@ public class playermovement : MonoBehaviour
         if (Input.GetKey(KeyCode.S))
         {
             //do crouch stuff
+            gameObject.transform.localScale = crouchHeight;
+        }
+        else
+        {
+            gameObject.transform.localScale = normalHeight;
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
