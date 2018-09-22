@@ -69,13 +69,6 @@ public class ObstacleSelectionUI : MonoBehaviour {
             selection.Add(available[buttonIndex]);
             selected += 1;
         }
-        else
-        {
-            if (ObstaclesSelectedEvent != null)
-            {
-                ObstaclesSelectedEvent(selection);
-            }
-        }
     }
 
     public void Update()
@@ -85,6 +78,16 @@ public class ObstacleSelectionUI : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Alpha3)) ObstacleSelected(2);
         if (Input.GetKeyDown(KeyCode.Alpha4)) ObstacleSelected(3);
         if (Input.GetKeyDown(KeyCode.Alpha5)) ObstacleSelected(4);
+
+        if(selected == MAX_SELECTION_SIZE)
+        {
+            if (ObstaclesSelectedEvent != null)
+            {
+                ObstaclesSelectedEvent(selection);
+                this.selection.Clear();
+                selected = 0;
+            }
+        }
     }
 
 
