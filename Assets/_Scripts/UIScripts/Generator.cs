@@ -115,7 +115,6 @@ public class Generator : MonoBehaviour {
                 numValleySquares = 0;
             }
 
-            Debug.Log(" " + i +" " + blockArray[i, 1]);
             if(numValleySquares >= 2)
             {
                 Instantiate(block, new Vector3(i - xoffset, 3 - yoffset, 0), Quaternion.identity);
