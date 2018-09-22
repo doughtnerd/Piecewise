@@ -22,11 +22,16 @@ public class MenuController : MonoBehaviour {
 
     public void OpenCredits()
     {
-
+        SceneManager.LoadScene("Credits");
     }
 
     public void ExitGame()
     {
         Application.Quit();
+    }
+
+    public void BackToMenu()
+    {
+        SceneManager.LoadScene("Menu");
     }
 }
