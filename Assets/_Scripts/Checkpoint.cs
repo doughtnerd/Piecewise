@@ -7,16 +7,11 @@ public class Checkpoint : MonoBehaviour {
 
     public static event Action CheckpointAction;
 
-	// Use this for initialization
-	void Start () {
-	}
-
     private void OnTriggerEnter(Collider other)
     {
-        CheckpointAction.Invoke();
+        if (other.tag == "Player" && CheckpointAction != null)
+        {
+            CheckpointAction.Invoke();
+        }
     }
-
-    // Update is called once per frame
-    void Update () {
-	}
 }
