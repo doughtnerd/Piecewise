@@ -37,7 +37,7 @@ public class JumpingCharacter : MonoBehaviour
         //this.anim = GetComponent<Animator>();
     }
 
-    public void Jump()
+    public void Jump(int jumpmultiplyer =1)
     {
         if (isGrounded && currentJump < jumpCount)
         {
@@ -58,7 +58,7 @@ public class JumpingCharacter : MonoBehaviour
             {
                 this.rigid.velocity = Vector3.zero;
             }
-            this.rigid.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
+            this.rigid.AddForce(Vector3.up * jumpPower * jumpmultiplyer, ForceMode.Impulse);
         }
     }
 
