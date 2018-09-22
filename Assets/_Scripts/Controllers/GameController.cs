@@ -13,7 +13,7 @@ public class GameController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-		
+        Checkpoint.CheckpointAction += HandleCheckpoint;
 	}
 	
 	// Update is called once per frame
