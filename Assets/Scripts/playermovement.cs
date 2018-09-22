@@ -28,6 +28,12 @@ public class playermovement : MonoBehaviour
         {
             //do crouch stuff
         }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            JumpingCharacter jump = GetComponent<JumpingCharacter>();
+            jump.Jump();
+        }
     }
     
     /*
