@@ -8,8 +8,8 @@ public class MovieCredits : MonoBehaviour {
 
     public List<string> names;
     private Queue<string> credits;
-    private double opacity = 0;
-    private bool increase;
+    private double opacity = 0.1;
+    private bool increase = true;
     private double change;
     [Range(20, 100)]
     public double textChangeSpeed;
