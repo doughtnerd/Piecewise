@@ -17,7 +17,7 @@ public class playermovement : MonoBehaviour
     
     private void Update()
     {
-        playerRigidBody.transform.position += Vector3.right * translationSpeed * Time.deltaTime;
+        //playerRigidBody.transform.position += Vector3.right * translationSpeed * Time.deltaTime;
 
         if (Input.GetKey(KeyCode.W))
         {
@@ -27,6 +27,12 @@ public class playermovement : MonoBehaviour
         if (Input.GetKey(KeyCode.S))
         {
             //do crouch stuff
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            JumpingCharacter jump = GetComponent<JumpingCharacter>();
+            jump.Jump();
         }
     }
     
