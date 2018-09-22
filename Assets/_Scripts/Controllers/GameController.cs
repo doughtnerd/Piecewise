@@ -1,12 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using System;
 
 public class GameController : MonoBehaviour {
     public static GameController Instance;
+    [SerializeField]
+    private int gameScene;
+    private float TIMER_INTERVAL = 1;
+    private float TIMER_DURATION = 3;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 		
 	}
 	
@@ -26,5 +32,49 @@ public class GameController : MonoBehaviour {
         {
             Destroy(this);
         }
+    }
+
+    void HandleSlowdown ()
+    {
+        Time.timeScale = 0.3f;
+    }
+
+    void HandleResumeSpeed ()
+    {
+        Time.timeScale = 1f;
+    }
+
+    void OpenDeathMenu ()
+    {
+        // To-do: Call death menu's open function.
+    }
+
+    void HandlePlayerDeath()
+    {
+        // Reset state/scene
+        SceneManager.LoadScene(gameScene);
+    }
+
+    void HandleCheckpoint()
+    {
+        // Get pieces to show
+        // To-do: Show checkpoint UI
+        // Assign input handler
+        StartCoroutine(RunTimer(TIMER_DURATION));
+        HandleSlowdown();
+    }
+
+    IEnumerator RunTimer(float duration)
+    {
+        float startTime = Time.time;
+        float endTime = startTime + duration;
+        while (Time.time < endTime)
+        {
+            // Fire events for UI
+            yield return new WaitForSeconds(TIMER_INTERVAL);
+        }
+
+        // To-do: Hide choice UI
+        // Resume with new choices
     }
 }
