@@ -20,37 +20,56 @@ public class Spawner : MonoBehaviour {
     private readonly float initialXPos = 4.31055f;
 
     private float nextSpawnPosition;
+    private float firstSpawnPosition;
 
 
     // Use this for initialization
     void Start () {
         nextSpawnPosition = initialXPos;
 
+        firstSpawnPosition = flatObstacle.GetComponent<ObstacleSize>().width / 2;
+
         // TESTING
         List<Obstacle> testList = new List<Obstacle>(testingArray);
-        SpawnObstacles(testList);
+        SpawnObstacles(testList, true);
     }
 
-    public void SpawnObstacles (List<Obstacle> obstacles)
+    public void SpawnObstacles (List<Obstacle> obstacles, bool firstTime=false)
     {
-        foreach (Obstacle obstacle in obstacles)
+        if (firstTime)
         {
-            SpawnEachObstacle(obstacle.prefab);
+            for (int i = 0; i < obstacles.Count; i++)
+            {
+                SpawnEachObstacle(obstacles[i].prefab);
+            }
+            SpawnEachObstacle(flatObstacle);
         }
-        SpawnEachObstacle(flatObstacle);
+
+        if (!firstTime)
+        {
+            Vector3 firstPos = new Vector3(firstSpawnPosition + obstacles[0].prefab.GetComponent<ObstacleSize>().width / 2 - initialXPos, yPos);
+            GameObject obj = Instantiate(obstacles[0].prefab, firstPos, Quaternion.identity);
+            nextSpawnPosition = obj.transform.position.x + obstacles[0].prefab.GetComponent<ObstacleSize>().width / 2;
+
+            for (int i = 1; i < obstacles.Count; i++)
+            {
+                SpawnEachObstacle(obstacles[i].prefab);
+            }
+            SpawnEachObstacle(flatObstacle);
+        }
     }
 
 
     private void SpawnEachObstacle(GameObject obstacle)
     {
-        //if (nextSpawnPosition != initialXPos)
-        //{
-        //    nextSpawnPosition += obstacle.GetComponent<ObstacleSize>().width / 2.0f;
-        //}
+        if (nextSpawnPosition != initialXPos)
+        {
+            nextSpawnPosition += obstacle.GetComponent<ObstacleSize>().width / 2.0f;
+        }
 
-        Instantiate(obstacle, new Vector3(nextSpawnPosition, yPos), Quaternion.identity);
+        GameObject obj = Instantiate(obstacle, new Vector3(nextSpawnPosition, yPos), Quaternion.identity);
 
-        float pos = obstacle.transform.position.x;
+        float pos = obj.transform.position.x;
         pos += obstacle.GetComponent<ObstacleSize>().width / 2.0f;
         nextSpawnPosition = pos;
     }
