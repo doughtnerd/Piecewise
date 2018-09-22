@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour {
 
-    public GameObject[] obstacleObjects;
+    public Obstacle[] obstacleObjects;
+
+    // TESTING: DELETE THIS
+    public Obstacle[] testingArray;
 
     private ObstacleSize previousObstacleSize;
     private Vector3 previousObstaclePos;
@@ -15,19 +18,17 @@ public class Spawner : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+
         // TESTING
-        List<ObstacleType> myList = new List<ObstacleType>();
-        myList.Add(ObstacleType.TestObstacle1);
-        myList.Add(ObstacleType.TestObstacle1);
-        myList.Add(ObstacleType.TestObstacle1);
-        SpawnObstacles(myList);
+        List<Obstacle> testList = new List<Obstacle>(testingArray);
+        SpawnObstacles(testList);
     }
 
-    public void SpawnObstacles (List<ObstacleType> obstacles)
+    public void SpawnObstacles (List<Obstacle> obstacles)
     {
-        foreach (ObstacleType obstacle in obstacles)
+        foreach (Obstacle obstacle in obstacles)
         {
-            SpawnEachObstacle(obstacleObjects[(int)obstacle]);
+            SpawnEachObstacle(obstacle.prefab);
         }
     }
 

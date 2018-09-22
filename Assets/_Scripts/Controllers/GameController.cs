@@ -96,7 +96,7 @@ public class GameController : MonoBehaviour
         }
     }
 
-    void HandleObstacleSelection(List<ObstacleType> selection)
+    void HandleObstacleSelection(List<Obstacle> selection)
     {
         Spawner spawner = GameObject.FindObjectOfType<Spawner>();
         spawner.SpawnObstacles(selection);

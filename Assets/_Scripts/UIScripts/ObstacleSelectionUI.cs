@@ -5,13 +5,13 @@ using System;
 using UnityEngine.UI;
 public class ObstacleSelectionUI : MonoBehaviour {
 
-    private List<ObstacleType> selection = new List<ObstacleType>();
-    private List<ObstacleType> available = new List<ObstacleType>();
+    private List<Obstacle> selection = new List<Obstacle>();
+    private List<Obstacle> available = new List<Obstacle>();
     private int selected = 0;
 
     private int MAX_SELECTION_SIZE = 3;
 
-    public static Action<List<ObstacleType>> ObstaclesSelectedEvent;
+    public static Action<List<Obstacle>> ObstaclesSelectedEvent;
 
     public static ObstacleSelectionUI Instance;
 
@@ -42,7 +42,7 @@ public class ObstacleSelectionUI : MonoBehaviour {
         uiPanel.SetActive(setActive);
     }
 
-    public void SetAvailableObstacles(List<ObstacleType> obstacles)
+    public void SetAvailableObstacles(List<Obstacle> obstacles)
     {
         this.available = obstacles;
 
@@ -56,7 +56,7 @@ public class ObstacleSelectionUI : MonoBehaviour {
     {
         for(int i = 0; i < available.Count && selected < MAX_SELECTION_SIZE; i++)
         {
-            ObstacleType type = available[i];
+            Obstacle type = available[i];
             if(!selection.Contains(type))
             {
                 ObstacleSelected(i);
