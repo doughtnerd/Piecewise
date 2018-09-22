@@ -7,28 +7,22 @@ using System;
 public class GameController : MonoBehaviour
 {
     public static GameController Instance;
+    public static event Action<int> TimerTickEvent;
+
+    public static readonly float OBSTACLE_MOVEMENT_SPEED = 5;
+
     [SerializeField]
     private int gameScene;
-    private IEnumerator timerCoroutine;
 
-    private float TIMER_INTERVAL = 1;
-    private float TIMER_DURATION = 3;
-    public static readonly float OBSTACLE_MOVEMENT_SPEED = 5;
+    private static readonly int TIMER_INTERVAL = 1;
+    private static readonly int TIMER_DURATION = 3;
 
     // Use this for initialization
     void Start()
     {
-
         Checkpoint.CheckpointAction += HandleCheckpoint;
         ObstacleSelectionUI.ObstaclesSelectedEvent += HandleObstacleSelection;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     void Awake()
     {
         if (Instance == null)
@@ -66,30 +60,45 @@ public class GameController : MonoBehaviour
     void HandleCheckpoint()
     {
         // Get pieces to show
-        // To-do: Show checkpoint UI
-        // Assign input handler
-        timerCoroutine = RunTimer(TIMER_DURATION);
-        StartCoroutine(timerCoroutine);
+        ObstacleSelectionUI.Instance.Show(true);
+
+        StartCoroutine(RunTimer(TIMER_DURATION));
         HandleSlowdown();
     }
 
-    IEnumerator RunTimer(float duration)
+    IEnumerator RunTimer(int duration)
     {
-        float startTime = Time.time;
-        float endTime = startTime + duration;
-        while (Time.time < endTime)
+        TriggerTimerTickEvent(duration);
+
+        while (duration > 0)
         {
-            // Fire events for UI
-            yield return new WaitForSeconds(TIMER_INTERVAL);
+            yield return new WaitForSecondsRealtime(TIMER_INTERVAL);
+            duration -= TIMER_INTERVAL;
+            TriggerTimerTickEvent(duration);
         }
 
-        // To-do: Hide choice UI
-        // Resume with new choices
-        ObstacleSelectionUI.Instance.AutoAssignSelection();
+        TriggerTimerTickEvent(0);
+
+        //ObstacleSelectionUI.Instance.AutoAssignSelection();
+
+        ObstacleSelectionUI.Instance.Show(false);
+
+        HandleResumeSpeed();
+
+        yield return null;
+    }
+
+    void TriggerTimerTickEvent(int currentTimerValue)
+    {
+        if(TimerTickEvent != null)
+        {
+            TimerTickEvent(currentTimerValue);
+        }
     }
 
     void HandleObstacleSelection(List<ObstacleType> selection)
     {
-        StopCoroutine(this.timerCoroutine);
+        Spawner spawner = GameObject.FindObjectOfType<Spawner>();
+        spawner.SpawnObstacles(selection);
     }
 }

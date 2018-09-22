@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-
+using UnityEngine.UI;
 public class ObstacleSelectionUI : MonoBehaviour {
 
     private List<ObstacleType> selection = new List<ObstacleType>();
@@ -15,32 +15,51 @@ public class ObstacleSelectionUI : MonoBehaviour {
 
     public static ObstacleSelectionUI Instance;
 
+    private GameObject buttonContainer;
+
+    [SerializeField]
+    private Text timertext;
+
     [SerializeField]
     private GameObject uiPanel;
 
+    [SerializeField]
+    private Obstacle[] obstacles;
 
     private void Awake()
     {
         Instance = this;
+        GameController.TimerTickEvent += HandleTimerTickEvent;
     }
 
-    void Show (bool setActive)
+    private void HandleTimerTickEvent(int time)
+    {
+        this.timertext.text = time + "";
+    }
+
+    public void Show (bool setActive)
     {
         uiPanel.SetActive(setActive);
     }
 
+    public void SetAvailableObstacles(List<ObstacleType> obstacles)
+    {
+        this.available = obstacles;
+
+        for(int i = 0; i < 5; i++)
+        {
+            Image button = buttonContainer.transform.GetChild(i).GetComponent<Image>();
+        }
+    }
+
     public void AutoAssignSelection()
     {
-        while(selected != MAX_SELECTION_SIZE)
+        for(int i = 0; i < available.Count && selected < MAX_SELECTION_SIZE; i++)
         {
-            for(int i = 0; i < available.Count; i++)
+            ObstacleType type = available[i];
+            if(!selection.Contains(type))
             {
-                ObstacleType type = available[i];
-                if(!selection.Contains(type))
-                {
-                    ObstacleSelected(i);
-                    break;
-                }
+                ObstacleSelected(i);
             }
         }
     }
@@ -60,4 +79,15 @@ public class ObstacleSelectionUI : MonoBehaviour {
             }
         }
     }
+
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1)) ObstacleSelected(0);
+        if (Input.GetKeyDown(KeyCode.Alpha2)) ObstacleSelected(1);
+        if (Input.GetKeyDown(KeyCode.Alpha3)) ObstacleSelected(2);
+        if (Input.GetKeyDown(KeyCode.Alpha4)) ObstacleSelected(3);
+        if (Input.GetKeyDown(KeyCode.Alpha5)) ObstacleSelected(4);
+    }
+
+
 }
