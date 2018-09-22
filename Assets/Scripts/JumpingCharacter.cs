@@ -39,7 +39,7 @@ public class JumpingCharacter : MonoBehaviour
 
     public void Jump()
     {
-        if (isGrounded || currentJump < jumpCount)
+        if (isGrounded && currentJump < jumpCount)
         {
             this.isGrounded = false;
 
@@ -74,6 +74,14 @@ public class JumpingCharacter : MonoBehaviour
                 //this.anim.SetBool("jumping", false);
                 this.currentJump = 0;
             }
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (LayerMask.GetMask(LayerMask.LayerToName(collision.gameObject.layer)) == groundLayer.value)
+        {
+            this.isGrounded = false;
         }
     }
 }
