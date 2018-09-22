@@ -15,16 +15,13 @@ public class ObstacleSelectionUI : MonoBehaviour {
 
     public static ObstacleSelectionUI Instance;
 
-    private GameObject buttonContainer;
+    public GameObject buttonContainer;
 
     [SerializeField]
     private Text timertext;
 
     [SerializeField]
     private GameObject uiPanel;
-
-    [SerializeField]
-    private Obstacle[] obstacles;
 
     private void Awake()
     {
@@ -49,6 +46,7 @@ public class ObstacleSelectionUI : MonoBehaviour {
         for(int i = 0; i < 5; i++)
         {
             Image button = buttonContainer.transform.GetChild(i).GetComponent<Image>();
+            button.sprite = obstacles[i].obstacleSprite;
         }
     }
 

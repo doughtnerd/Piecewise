@@ -9,12 +9,15 @@ public class Spawner : MonoBehaviour {
     // TESTING: DELETE THIS
     public Obstacle[] testingArray;
 
+    public GameObject flatObstacle;
+
     private ObstacleSize previousObstacleSize;
     private Vector3 previousObstaclePos;
 
     private readonly int sizeOfBlock = 1;
     private readonly float yPos = -3.268487f;
     private readonly float initialXPos = 4.31055f;
+
 
     // Use this for initialization
     void Start () {
@@ -30,6 +33,7 @@ public class Spawner : MonoBehaviour {
         {
             SpawnEachObstacle(obstacle.prefab);
         }
+        SpawnEachObstacle(flatObstacle);
     }
 
     private void SpawnEachObstacle(GameObject obstacle)

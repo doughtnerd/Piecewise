@@ -61,7 +61,7 @@ public class GameController : MonoBehaviour
     {
         // Get pieces to show
         ObstacleSelectionUI.Instance.Show(true);
-
+        ObstacleSelectionUI.Instance.SetAvailableObstacles(new List<Obstacle>(GameObject.FindObjectOfType<Spawner>().obstacleObjects));
         StartCoroutine(RunTimer(TIMER_DURATION));
         HandleSlowdown();
     }
