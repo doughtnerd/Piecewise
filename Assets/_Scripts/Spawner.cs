@@ -14,13 +14,17 @@ public class Spawner : MonoBehaviour {
     private ObstacleSize previousObstacleSize;
     private Vector3 previousObstaclePos;
 
+
     private readonly int sizeOfBlock = 1;
     private readonly float yPos = -3.268487f;
     private readonly float initialXPos = 4.31055f;
 
+    private float nextSpawnPosition;
+
 
     // Use this for initialization
     void Start () {
+        nextSpawnPosition = initialXPos;
 
         // TESTING
         List<Obstacle> testList = new List<Obstacle>(testingArray);
@@ -36,29 +40,48 @@ public class Spawner : MonoBehaviour {
         SpawnEachObstacle(flatObstacle);
     }
 
+
     private void SpawnEachObstacle(GameObject obstacle)
     {
-        int previousWidth = 0;
-        if (previousObstacleSize != null)
-        {
-            previousWidth = previousObstacleSize.width;
-        }
+        //if (nextSpawnPosition != initialXPos)
+        //{
+        //    nextSpawnPosition += obstacle.GetComponent<ObstacleSize>().width / 2.0f;
+        //}
 
-        float xPos = previousWidth * sizeOfBlock;
-        if (previousObstacleSize == null)
-        {
-            xPos = initialXPos;
-        }
+        Instantiate(obstacle, new Vector3(nextSpawnPosition, yPos), Quaternion.identity);
 
-        if (previousObstaclePos != null)
-        {
-            xPos += previousObstaclePos.x;
-        }
-
-        Vector3 pos = new Vector3(xPos, yPos, 0.0f);
-
-        Instantiate(obstacle, pos, Quaternion.identity);
-        previousObstacleSize = obstacle.GetComponent<ObstacleSize>();
-        previousObstaclePos = pos;
+        float pos = obstacle.transform.position.x;
+        pos += obstacle.GetComponent<ObstacleSize>().width / 2.0f;
+        nextSpawnPosition = pos;
     }
+
+    //private void SpawnEachObstacle(GameObject obstacle)
+    //{
+    //    int previousWidth = 0;
+    //    if (previousObstacleSize != null)
+    //    {
+    //        previousWidth = previousObstacleSize.width;
+    //    }
+
+    //    float xPos = 0.0f;
+    //    if (previousObstacleSize == null)
+    //    {
+    //        xPos = initialXPos;
+    //    }
+
+    //    if (previousObstaclePos != null)
+    //    {
+    //        xPos += previousObstaclePos.x;
+    //        if (previousObstacleSize != null)
+    //        {
+    //            xPos += previousObstacleSize.width / 2 + obstacle.GetComponent<ObstacleSize>().width / 2;
+    //        }
+    //    }
+
+    //    Vector3 pos = new Vector3(xPos, yPos, 0.0f);
+
+    //    Instantiate(obstacle, pos, Quaternion.identity);
+    //    previousObstacleSize = obstacle.GetComponent<ObstacleSize>();
+    //    previousObstaclePos = pos;
+    //}
 }

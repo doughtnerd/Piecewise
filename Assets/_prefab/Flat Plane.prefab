@@ -58,6 +58,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4443360746108208}
+  - component: {fileID: 114264639964192826}
   m_Layer: 0
   m_Name: Flat Plane
   m_TagString: Untagged
@@ -72,7 +73,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1849759058187868}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 62.342552, y: -14.726625, z: -0.3515625}
+  m_LocalPosition: {x: 37.76702, y: -20.099882, z: -0.3515625}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4709157598935248}
@@ -101,7 +102,7 @@ Transform:
   m_GameObject: {fileID: 1702384216746944}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
   m_LocalPosition: {x: -3.4492831, y: 1.2075522, z: 0.3515625}
-  m_LocalScale: {x: 1, y: 1, z: 50.00003}
+  m_LocalScale: {x: 1, y: 1, z: 19}
   m_Children: []
   m_Father: {fileID: 4443360746108208}
   m_RootOrder: 0
@@ -202,6 +203,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114264639964192826
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1849759058187868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c9392a386badb7458675e8cd3b6b837, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  width: 19
 --- !u!114 &114632224269832188
 MonoBehaviour:
   m_ObjectHideFlags: 1
