@@ -221,7 +221,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1205845349}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6dc7e0fbaa46d1c459e5cabc73b5c14f, type: 3}
   m_Name: 
@@ -334,6 +334,7 @@ GameObject:
   - component: {fileID: 1948150333}
   - component: {fileID: 1948150332}
   - component: {fileID: 1948150331}
+  - component: {fileID: 1948150335}
   m_Layer: 0
   m_Name: Floor
   m_TagString: Untagged
@@ -408,6 +409,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &1948150335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1948150330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dc7e0fbaa46d1c459e5cabc73b5c14f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translationSpeed: -5
+  jumpHeight: 0
+  playerRigidBody: {fileID: 0}
 --- !u!1 &2023319024
 GameObject:
   m_ObjectHideFlags: 0

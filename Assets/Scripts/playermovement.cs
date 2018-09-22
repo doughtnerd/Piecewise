@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class playermovement : MonoBehaviour
 {
-    public float translationSpeed;
     public float jumpHeight;
 
     public Rigidbody playerRigidBody;
@@ -17,11 +16,12 @@ public class playermovement : MonoBehaviour
     
     private void Update()
     {
-        playerRigidBody.transform.position += Vector3.right * translationSpeed * Time.deltaTime;
+        //playerRigidBody.transform.position += Vector3.right * translationSpeed * Time.deltaTime;
 
         if (Input.GetKey(KeyCode.W))
         {
-            playerRigidBody.transform.position += Vector3.up * jumpHeight * Time.deltaTime;
+            //playerRigidBody.transform.position += Vector3.up * jumpHeight * Time.deltaTime;
+            playerRigidBody.AddForce(Vector3.up * jumpHeight * Time.deltaTime * 2, ForceMode.Impulse);
         }
 
         if (Input.GetKey(KeyCode.S))
