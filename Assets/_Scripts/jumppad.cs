@@ -11,7 +11,7 @@ public class jumppad : MonoBehaviour {
         {
 
             JumpingCharacter jump = GetComponent<JumpingCharacter>();
-            jump.Jump();
+            jump.Jump(jumpmultiplyer);
 
         }
     }
