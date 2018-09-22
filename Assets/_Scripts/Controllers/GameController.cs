@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GameController : MonoBehaviour {
+    public static GameController Instance;
 
 	// Use this for initialization
 	void Start () {
@@ -13,4 +14,17 @@ public class GameController : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    void Awake ()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(this);
+        }
+        else if (this != Instance)
+        {
+            Destroy(this);
+        }
+    }
 }
